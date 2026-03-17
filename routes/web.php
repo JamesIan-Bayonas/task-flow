@@ -1,15 +1,16 @@
 <?php
 
-// routes/web.php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\HelloController;
+use App\Http\Controllers\NoteController;
 
-// Member 1 (Bayonas): Basic Logic Route
-Route::get('/', DashboardController::class)->name('dashboard');
+// 1. OVERRIDE: Redirect the default homepage to our new Notes app
+Route::get('/', function () {
+    return redirect('/hello');
+});
 
-// Member 2 (Calago): Resourceful CRUD Routes (Generates 7 routes instantly)
-Route::resource('tasks', TaskController::class);
+// 2. Member 1 (Bayonas): The Hello World Route
+Route::get('/hello', [HelloController::class, 'index']);
 
-// Member 3 (Bernal): API/JSON Route
-Route::get('/api/tasks', [TaskController::class, 'apiIndex']);
+// 3. Member 3 (Bernal): The Resourceful CRUD Routes
+Route::resource('notes', NoteController::class);
